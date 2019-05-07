@@ -1,24 +1,6 @@
 # README
+## initial commitの内容
+- rails new request_platform -d mysql --api
+- gemfileのrack-corsのコメントアウトを外し
+- testディレクトリ削除
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
