@@ -6,7 +6,7 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div className='sidebar'>
-        <SidebarIcon image="aaa"/>
+        <SidebarIcon image="home"/>
       </div>
     );
   }
