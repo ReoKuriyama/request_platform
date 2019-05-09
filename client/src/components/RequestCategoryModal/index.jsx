@@ -1,12 +1,14 @@
 import React from 'react'
 import './index.scss'
 
+import Request from '../Request/index'
+
 class RequestCategory extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isToggleOn: true};
+    this.state = {isToggleOn: false,
+    };
 
-    // This binding is necessary to make `this` work in the callback
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -18,9 +20,16 @@ class RequestCategory extends React.Component {
 
   render() {
     return (
-      <button className='requestCategoryModal' onClick={this.handleClick}>
-      {this.props.title}
-      </button>
+     <div className='request'>
+        <button className='requestCategoryModal' onClick={ this.handleClick }>
+          { this.props.title }
+        </button>
+
+      {this.state.isToggleOn &&
+        this.props.requests.map((request, i) =>
+          <Request key={i} request={request} />)
+      }
+      </div>
     );
   }
 }
