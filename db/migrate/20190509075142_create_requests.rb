@@ -11,7 +11,7 @@ class CreateRequests < ActiveRecord::Migration[5.1]
       t.integer :status, default: 0, null: false
       t.boolean :will_do
 
-      t.integer :category_id
+      t.integer :request_category_id
 
       t.timestamps
     end
