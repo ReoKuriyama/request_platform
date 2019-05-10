@@ -1,4 +1,6 @@
 class Request < ApplicationRecord
+  belongs_to :request_category
+
   with_options presence: true do
     validates :creator
     validates :summary
