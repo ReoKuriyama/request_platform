@@ -19,13 +19,13 @@ class Request extends React.Component {
       <div className='requestModal' onClick={this.handleClick}>
         <ul>
           <li>
-             { request.date }
+             { request.attributes.created_at }
           </li>
           <li>
-             { request.title }
+             { request.attributes.summary }
           </li>
           <li>
-             { request.content }
+             { request.attributes.current_problem }
           </li>
         </ul>
       </div>
