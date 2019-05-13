@@ -9,9 +9,20 @@
   -webkit-align-items: center; /* 縦方向中央揃え（Safari用） */
   align-items: center; /* 縦方向中央揃え */
 
-  ul li {
-    float: left;
-    list-style: none;
-    padding: 2px 10px 2px 0px;;
+  ul {
+    li {
+      float: left;
+      list-style: none;
+      padding: 2px 10px 2px 0px;;
+    }
+    .createdAt {
+      width: 80px;
+    }
+    .summary {
+      width: 200px;
+    }
+    .count {
+      width: 20px;
+    }
   }
 }

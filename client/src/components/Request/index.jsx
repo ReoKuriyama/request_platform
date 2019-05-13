@@ -18,14 +18,14 @@ class Request extends React.Component {
     return (
       <div className='requestModal' onClick={this.handleClick}>
         <ul>
-          <li>
+          <li className='createdAt'>
              { request.attributes.created_at }
           </li>
-          <li>
+          <li className='summary'>
              { request.attributes.summary }
           </li>
           <li>
-             { request.attributes.current_problem }
+             { request.attributes.count }
           </li>
         </ul>
       </div>
