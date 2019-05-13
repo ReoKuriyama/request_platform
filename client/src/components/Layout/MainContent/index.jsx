@@ -1,24 +1,37 @@
 import React from 'react'
+import axios from 'axios';
 import RequestCategoryModal from '../../RequestCategoryModal/index'
 import './index.scss'
 
 class MainContent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {categories: [
-      {title: "Category1", requests: [{date: "2019/04/01", title: "Request1-1", content: "memomemomemomemomemomemomemomemo"}, {date: "2019/10/01", title: "Request1-2", content: "testtesttest"}]},
-      {title: "Category2", requests: [{title: "Request2"}]},
-      {title: "Category3", requests: [{title: "Request3"}]},
-      {title: "Category4", requests: [{title: "Request4"}]},
-      {title: "Category5", requests: [{title: "Request5"}]},
-    ]};
+    this.state = {categories: {data: [], included: []}};
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:3001/requests')
+    .then((results) => {
+      this.setState({categories: results.data})
+    })
+  }
+
+
   render() {
+   const info = this.state
+    const requestsSortByCategory = [];
+    info.categories.data.map(function(category) {
+      const requests = [];
+      category.relationships.requests.data.map(function(request) {
+        requests.push(info.categories.included.find(item => item.id === request.id));
+      });
+      requestsSortByCategory.push(requests);
+    });
+
     return (
       <div className='mainContent'>
-        {this.state.categories.map((requestCategory, i) =>
-         <RequestCategoryModal key={i} title={requestCategory.title} requests={requestCategory.requests} />)}
+        {this.state.categories.data.map((requestCategory, i) =>
+         <RequestCategoryModal key={i} title={requestCategory.attributes.name} requests={requestsSortByCategory[i]} />)}
       </div>
     );
   }
