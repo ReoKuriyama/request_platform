@@ -10,7 +10,7 @@ class ActionButton extends React.Component {
   }
 
   handleClick(e) {
-    this.props.onNewModalChange(e.target.value);
+    this.props.openModal(e.target.value);
   }
 
   render() {
