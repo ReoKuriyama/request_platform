@@ -17,7 +17,6 @@ class Request extends React.Component {
     const request = this.props.request
     return (
       <div className='requestModal' onClick={this.handleClick}>
-        <ul>
           <li className='createdAt'>
              { request.attributes.created_at }
           </li>
@@ -27,7 +26,6 @@ class Request extends React.Component {
           <li>
              { request.attributes.count }
           </li>
-        </ul>
       </div>
     );
   }
