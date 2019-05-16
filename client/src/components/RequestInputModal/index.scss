@@ -1,0 +1,21 @@
+.requestInputModal {
+  label {
+    display: block;
+    margin: 20px;
+
+    input {
+      height: 20px;
+      float: right;
+      margin-right: 20px;
+      outline: none;
+    }
+
+    .summary {
+      width: 300px;
+    }
+
+    .officeId {
+      width: 20px;
+    }
+  }
+}

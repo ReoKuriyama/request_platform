@@ -6,8 +6,7 @@ import Request from '../Request/index'
 class RequestCategory extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isToggleOn: false,
-    };
+    this.state = { isToggleOn: false };
 
     this.handleClick = this.handleClick.bind(this);
   }
