@@ -23,7 +23,7 @@ class MainContent extends React.Component {
       info.categories.data.map(function(category) {
         const requests = [];
         category.relationships.requests.data.map(function(request) {
-          requests.push(info.categories.included.find(item => item.id === request.id));
+          requests.push(info.categories.included.find(item => item.id === request.id).attributes);
         });
         requestsSortByCategory.push(requests);
       });
