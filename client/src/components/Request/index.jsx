@@ -1,34 +1,17 @@
 import React from 'react'
 import './index.scss'
 
-class Request extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {isToggleOn: true};
+import PlusCountButton from '../PlusCountButton/index'
 
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    console.log(1);
-  }
-
-  render() {
-    const request = this.props.request
-    return (
-      <div className='requestModal' onClick={this.handleClick}>
-          <li className='createdAt'>
-             { request.attributes.created_at }
-          </li>
-          <li className='summary'>
-             { request.attributes.summary }
-          </li>
-          <li>
-             { request.attributes.count }
-          </li>
-      </div>
-    );
-  }
-}
+const Request = ({request}) => 
+  <div className='requestModal'>
+    <li className='createdAt'>
+      { request.created_at }
+    </li>
+    <li className='summary'>
+      { request.summary }
+    </li>
+    <PlusCountButton count={request.count} id={request.id} />
+  </div>
 
 export default Request
