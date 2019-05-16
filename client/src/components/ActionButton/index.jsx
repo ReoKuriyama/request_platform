@@ -4,8 +4,6 @@ import './index.scss'
 class ActionButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {isToggleOn: true};
-
     this.handleClick = this.handleClick.bind(this);
   }
 
