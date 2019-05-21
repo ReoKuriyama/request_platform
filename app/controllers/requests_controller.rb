@@ -1,9 +1,10 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: %i[update]
+  before_action :set_request, only: %i[show update]
 
   def index
-    request_categories = RequestCategory.all
-    json_string = RequestCategorySerializer.new(request_categories, include: [:requests]).serialized_json
+    requests = Request.all.order('count DESC')
+
+    json_string = RequestSerializer.new(requests).serialized_json
     render json: json_string
   end
 
@@ -13,6 +14,11 @@ class RequestsController < ApplicationController
       head :ok
     else
     end
+  end
+
+  def show
+    json_string = RequestSerializer.new(@request).serialized_json
+    render json: json_string
   end
 
   def update
