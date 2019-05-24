@@ -2,9 +2,9 @@ class RequestSerializer
   include FastJsonapi::ObjectSerializer
   belongs_to :request_category
 
-  attributes :id, :creator, :summary, :current_problem, :improvement_idea, :office_id, :estimate, :count, :status, :will_do
+  attributes :id, :summary, :description, :improvement_idea, :estimate, :count, :jira_ticket_id, :function_impact, :office_scale, :request_category_id
 
-  attributes :created_at do |object|
-    object.created_at.strftime('%Y/%m/%d')
+  attributes :category_name do |object|
+    object.request_category.name
   end
 end
