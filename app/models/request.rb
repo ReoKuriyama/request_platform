@@ -1,6 +1,9 @@
 class Request < ApplicationRecord
   has_many :tickets
-  belongs_to :request_category
+  belongs_to :request_category, optional: true
+
+  has_many :request_tags
+  has_many :tags, through: :request_tags
 
   with_options presence: true do
     validates :summary

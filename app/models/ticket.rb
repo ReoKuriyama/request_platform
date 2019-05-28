@@ -13,4 +13,8 @@ class Ticket < ApplicationRecord
   def self.unclassified_tickets
     where(request_id: nil)
   end
+
+  def all_text_info
+    subject + description + all_comments
+  end
 end
