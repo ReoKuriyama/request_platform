@@ -17,14 +17,13 @@ class RequestsController < ApplicationController
       requests = Request.all.order('count DESC')
     end
 
-    json_string = RequestSerializer.new(requests).serialized_json
+    json_string = RequestSerializer.new(requests, include: [:tags]).serialized_json
     render json: json_string
   end
 
   def create
     request = Request.create(request_params)
 
-    binding.pry
     tag1 = Tag.new(keyword: params[:request][:tags1])
     tag2 = Tag.new(keyword: params[:request][:tags2])
 
@@ -38,7 +37,7 @@ class RequestsController < ApplicationController
   end
 
   def show
-    json_string = RequestSerializer.new(@request).serialized_json
+    json_string = RequestSerializer.new(@request, include: [:tags, :tickets]).serialized_json
     render json: json_string
   end
 
