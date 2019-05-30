@@ -10,11 +10,6 @@ class JoinZendeskComment
   end
 
   def call
-    join_comments = ''
-    comments.each do |comment|
-      join_comments += comment[:body] + "\n"
-    end
-
-    join_comments
+    comments.pluck(:body).join("\n")
   end
 end
