@@ -1,5 +1,6 @@
 class ExtractNouns
   attr_reader :sentence
+
   def self.call(sentence:)
     new(sentence: sentence).call
   end
@@ -11,7 +12,7 @@ class ExtractNouns
   def call
     keywords = []
     Natto::MeCab.new.parse(sentence) do |n|
-      if n.feature.split(",").first == "名詞"
+      if n.feature.split(',').first == '名詞'
         keywords.push(n.surface)
       end
     end
