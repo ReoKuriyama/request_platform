@@ -1,8 +1,4 @@
 class GetRequestsController < ApplicationController
-  # def index
-  #   request_json = 1
-  # end
-
   def show
     request_ticket_json = Api::Zendesk::Ticket.new.show(params[:id])[:ticket]
     request_comments_json = Api::Zendesk::Comment.new.index(params[:id])[:comments]
