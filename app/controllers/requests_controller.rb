@@ -3,7 +3,7 @@ class RequestsController < ApplicationController
   before_action :set_request, only: %i[show update]
 
   def index
-    if @ticket
+    if @ticket # チケットも渡された場合は、チケットのコメントからひも付きそうな要望を表示する
       keywords = ExtractNouns.call(sentence: @ticket.all_text_info)
 
       tags = Tag.ransack(keyword_cont_any: keywords).result
@@ -22,16 +22,7 @@ class RequestsController < ApplicationController
   end
 
   def create
-    request = Request.create(request_params)
-
-    tag1 = Tag.new(keyword: params[:request][:tags1])
-    tag2 = Tag.new(keyword: params[:request][:tags2])
-
-    tag1.request_ids = request.id
-    tag2.request_ids = request.id
-
-    tag1.save
-    tag2.save
+    Request.create(request_params)
 
     head :ok
   end
@@ -59,7 +50,8 @@ class RequestsController < ApplicationController
   end
 
   def request_params
-    params.require(:request).permit(
+    @request_params = params.require(:request).permit(
+      :id,
       :summary,
       :description,
       :improvement_idea,
@@ -67,7 +59,20 @@ class RequestsController < ApplicationController
       :function_impact,
       :office_scale,
       :request_category_id,
-      :count
+      :count,
+      tag_ids: []
     )
+
+    new_tags = params[:request][:tags]
+
+    if new_tags
+      @request_params[:tag_ids] = []
+      new_tags.each do |new_tag|
+        tag = Tag.find_or_create_by(keyword: new_tag[:text])
+        @request_params[:tag_ids] << tag.id
+      end
+    end
+
+    @request_params
   end
 end

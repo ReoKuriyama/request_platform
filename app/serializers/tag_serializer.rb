@@ -1,4 +1,4 @@
 class TagSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :keyword
+  attributes :id, :keyword
 end
