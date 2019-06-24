@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_action :set_ticket, only: %i[update]
+  before_action :set_ticket, only: %i[update classify reclassify]
 
   def index
     tickets = Ticket.unclassified_tickets
@@ -8,12 +8,24 @@ class TicketsController < ApplicationController
   end
 
   def update
-    if @ticket.update(ticket_params)
-      request = Request.find(ticket_params[:request_id]).tap{|request| request.count += 1}
-      request.save
-      head :ok
-    else
+  end
+
+  def classify
+    Ticket.transaction do
+      @ticket.update!(ticket_params)
+      @ticket.request.update!(count: @ticket.request.count + 1)
     end
+
+    head :ok
+  end
+
+  def reclassify
+    Ticket.transaction do
+      @ticket.request.update!(count: @ticket.request.count - 1)
+      @ticket.update!(request_id: nil)
+    end
+
+    head :ok
   end
 
   private

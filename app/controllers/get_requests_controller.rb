@@ -8,8 +8,10 @@ class GetRequestsController < ApplicationController
     ticket = Ticket.new(subject: request_ticket_json[:subject], description: request_ticket_json[:description], all_comments: joined_comments, zendesk_ticket_id: request_ticket_json[:id]) 
 
     if ticket.save
-      true
+      json_string = TicketSerializer.new(ticket).serialized_json
+      render json: json_string
     else
+
     end
   end
 end
