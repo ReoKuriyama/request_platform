@@ -39,6 +39,18 @@ class RequestsController < ApplicationController
     end
   end
 
+  def search
+    case search_params[:name]
+    when 'summary'
+      requests = Request.ransack(summary_cont_any: search_params[:keyword]).result
+    when 'description'
+      requests = Request.ransack(description_cont_any: search_params[:keyword]).result
+    end
+
+    json_string = RequestSerializer.new(requests, include: [:tags]).serialized_json
+    render json: json_string
+  end
+
   private
 
   def set_ticket
@@ -74,5 +86,12 @@ class RequestsController < ApplicationController
     end
 
     @request_params
+  end
+
+  def search_params
+    params.require(:search).permit(
+      :name,
+      :keyword
+    )
   end
 end

@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  resources :requests
+  resources :requests do
+    collection do
+      post 'search', action: :search
+    end
+  end
   resources :request_categories, only: %i[index]
+
   resources :get_requests, only: %i[show]
   resources :tickets, only: %i[index update] do
     collection do
