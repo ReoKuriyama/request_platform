@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   end
   resources :request_categories, only: %i[index]
 
-  resources :get_requests, only: %i[show]
   resources :tickets, only: %i[index update] do
     collection do
       get ':id/reclassify', action: :reclassify
