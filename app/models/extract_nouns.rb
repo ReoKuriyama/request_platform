@@ -12,9 +12,7 @@ class ExtractNouns
   def call
     keywords = []
     Natto::MeCab.new.parse(sentence) do |n|
-      if n.feature.split(',').first == '名詞'
-        keywords.push(n.surface)
-      end
+      keywords.push(n.surface) if n.feature.split(',').first == '名詞'
     end
 
     keywords
