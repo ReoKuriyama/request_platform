@@ -75,7 +75,7 @@ class RequestsController < ApplicationController
       tag_ids: []
     )
 
-    new_tags = params[:request][:tags]
+    new_tags = params[:tags]
 
     if new_tags
       @request_params[:tag_ids] = []
