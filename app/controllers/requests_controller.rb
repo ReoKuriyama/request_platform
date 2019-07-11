@@ -4,7 +4,7 @@ class RequestsController < ApplicationController
 
   def index
     if @ticket # チケットも渡された場合は、チケットのコメントからひも付きそうな要望を表示する
-      keywords = ExtractNouns.call(sentence: @ticket.all_text_info)
+      keywords = ExtractNouns.call(sentence: @ticket.description)
 
       tags = Tag.ransack(keyword_cont_any: keywords).result
       request_ids = []
