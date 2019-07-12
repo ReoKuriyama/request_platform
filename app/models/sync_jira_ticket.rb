@@ -5,7 +5,7 @@ class SyncJiraTicket
   DESCRIPTION = :customfield_10046
 
   def self.call
-    json = Api::Jira::Issue.new.search(latest_ticket_id: Ticket.last&.jira_issue_id)
+    json = Api::Jira::Issue.new.search(latest_ticket_id: Ticket.maximum('jira_issue_id'))
 
     json[:issues].each do |issue|
       issue_data = issue[:fields]
