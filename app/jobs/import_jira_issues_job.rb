@@ -10,10 +10,10 @@ class ImportJiraIssuesJob < ApplicationJob
       issue_data = issue[:fields]
       ticket = Ticket.new(
         subject: issue_data[SUMMARY_FIELD_NAME.to_sym],
-        description: issue_data[DESCRIPTION.to_sym],
-        office_id: issue_data[OFFICE_ID.to_sym],
-        zendesk_ticket_id: issue_data[ZENDESK_TICKET_ID.to_sym],
-        zendesk_reporter: [ZENDESK_REPORTER].to_sym,
+        description: issue_data[DESCRIPTION_FIELD_NAME.to_sym],
+        office_id: issue_data[OFFICE_ID_FIELD_NAME.to_sym],
+        zendesk_ticket_id: issue_data[ZENDESK_TICKET_ID_FIELD_NAME.to_sym],
+        zendesk_reporter: issue_data[ZENDESK_REPORTER_FIELD_NAME.to_sym],
         jira_issue_id: issue[:id]
       )
       ticket.save
@@ -25,7 +25,7 @@ class ImportJiraIssuesJob < ApplicationJob
   def get_issues_json
     latest_ticket_id = Ticket.maximum('jira_issue_id')
 
-    resoponse = Api::Jira.new.get_issues do |req|
+    response = Api::Jira.new.get_issues do |req|
       req.body = {
         jql: "id > #{latest_ticket_id}",
         maxResults: 15,
@@ -40,6 +40,6 @@ class ImportJiraIssuesJob < ApplicationJob
       }.to_json
     end
 
-    JSON.parse(resoponse.body, { symbolize_names: true })
+    JSON.parse(response.body, { symbolize_names: true })
   end
 end
