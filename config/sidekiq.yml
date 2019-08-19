@@ -1,0 +1,11 @@
+:max_retries: 0
+
+# https://github.com/mperham/sidekiq/wiki/Advanced-Options#concurrency
+# https://repl.info/archives/659/
+:concurrency: <%= ENV.fetch("RAILS_MAX_THREADS", 5) - 1 %>
+
+:pidfile: /tmp/iv_yobo_sidekiq.pid
+:logfile: /var/log/iv_yobo_sidekiq.log
+
+:queues:
+  - default

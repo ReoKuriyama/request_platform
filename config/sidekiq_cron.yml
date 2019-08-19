@@ -1,0 +1,5 @@
+- name: Jira issue 取り込み
+  cron: '*/5 * * * * Asia/Tokyo'
+  class: ImportJiraIssuesJob
+  description: |
+    zendeskから連携されてJiraに保存されたissueをインポートする。

@@ -28,7 +28,7 @@ gem 'puma', '~> 3.7'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  
+
   gem 'pry-rails'
 end
 
@@ -47,3 +47,9 @@ gem 'faraday'
 gem 'ransack'
 gem 'mecab'
 gem 'natto'
+
+gem 'sidekiq'
+gem 'sidekiq-cron'
+
+gem 'redis-namespace'
+gem 'redis-objects'

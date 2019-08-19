@@ -1,0 +1,11 @@
+default: &default
+  redis_base_url: 'redis://localhost:6384'
+  redis_namespace: 'iv_yobo'
+  redis_default_db: 1
+  redis_sidekiq_db: 2
+
+development:
+  <<: *default
+
+production:
+  <<: *default
